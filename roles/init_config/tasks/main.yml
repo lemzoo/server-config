@@ -1,0 +1,52 @@
+# establish non-root user with sudo privileges
+- name: create a non-root group
+  group:
+    name: "{{ deploy_group }}"
+    state: present
+  become: yes
+
+- name: create a non-root user
+  user:
+    name: "{{ deploy_user }}"
+    group: "{{ deploy_group }}"
+    shell: "/bin/bash"
+    state: present
+  become: yes
+
+- name: add authorized key to non-root user
+  authorized_key:
+    user: "{{ deploy_user }}"
+    state: present
+    key: "{{ lookup('file', authorized_key_filename) }}"
+  become: yes
+
+- name: add non-root group to sudo privilege
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^{{ deploy_group }}"
+    line: "%{{ deploy_group }} ALL=(ALL) NOPASSWD: ALL"
+    validate: visudo -cf %s
+  become: yes
+
+- name: disable root SSH login
+  replace:
+    destfile: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin yes"
+    replace: "PermitRootLogin no"
+    backup: no
+  become: yes
+
+- name: disable SSH logins by password
+  replace:
+    destfile: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication yes"
+    replace: "PasswordAuthentication no"
+    backup: no
+  become: yes
+
+- name: restart SSH service
+  service:
+    name: ssh
+    state: restarted
+  become: yes

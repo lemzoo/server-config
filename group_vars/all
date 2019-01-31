@@ -1,0 +1,7 @@
+deploy_user: deployer
+deploy_group: deployers
+authorized_key_filename: "{{ lookup('env', 'AUTHORIZED_KEY')}}"
+
+db_name: "firstdatabase"
+db_user: "{{ deploy_user }}"
+db_password: P@ssw0rd

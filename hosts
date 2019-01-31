@@ -1,0 +1,13 @@
+[init_config]
+ec2-35-180-242-64.eu-west-3.compute.amazonaws.com ansible_python_interpreter=/usr/bin/python3
+ec2-35-180-139-46.eu-west-3.compute.amazonaws.com ansible_python_interpreter=/usr/bin/python3
+
+[common]
+ec2-35-180-242-64.eu-west-3.compute.amazonaws.com ansible_python_interpreter=/usr/bin/python3
+ec2-35-180-139-46.eu-west-3.compute.amazonaws.com ansible_python_interpreter=/usr/bin/python3
+
+[webserver]
+ec2-35-180-242-64.eu-west-3.compute.amazonaws.com ansible_python_interpreter=/usr/bin/python3
+
+[database]
+ec2-35-180-139-46.eu-west-3.compute.amazonaws.com ansible_python_interpreter=/usr/bin/python3

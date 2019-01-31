@@ -1,0 +1,11 @@
+# install security configuration
+#c>t
+
+- name: enable SSH within the firewall
+  ufw: rule=allow port=22
+  become: yes
+
+- name: enable firewall itself
+  ufw: state=enabled
+  become: yes
+
