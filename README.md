@@ -17,25 +17,23 @@ Task example:
 ### Roles
 Roles are a required file naming and directory convention for grouping tasks
 and variables.
-Example of roles:
-#################
-base_directory/
-  deployment.yml
-  group_vars/
-    all
-    webserver
-  roles/
-    common/
-      tasks/
-        main.yml
-        git.yml
-    webserver/
-      tasks/
-        main.yml
-        nginx.yml
+### Example of roles:
+- base_directory/
+  - deployment.yml
+  - group_vars/
+    - all
+    - webserver
+  - roles/
+    - common/
+      - tasks/
+        - main.yml
+        - git.yml
+    - webserver/
+      - tasks/
+        - main.yml
+        - nginx.yml
         
-Why user roles ?
-################
+### Why user roles ?
 Roles make groups of Ansible tasks reusable, both for different environments
 and for usage between projects
 
@@ -43,43 +41,41 @@ and for usage between projects
 Playbooks are the top-level collection that contain one or more roles, many 
 tasks, variables and all other information necessary for execution
 
-Example of playbooks
-####################
-base_directory/
-  hosts -> List of hosts where the playbook will be executed
-  deployment.yml
-  group_vars/
-    all
-    webserver
-  roles/
-    common/
-      tasks/
-        main.yml
-        git.yml
-    webserver/
-      tasks/
-        main.yml
-        nginx.yml
+### Example of playbooks
+- base_directory/
+  - hosts -> List of hosts where the playbook will be executed
+  - deployment.yml
+  - group_vars/
+    - all
+    - webserver
+  - roles/
+    - common/
+      - tasks/
+        - main.yml
+        - git.yml
+    - webserver/
+      - tasks/
+        - main.yml
+        - nginx.yml
 
 ### Inventory
 The Ansible inventory contains the list of servers to execute against and is 
 typically grouped by role.
 Default inventory is /etc/ansible/hosts
 
-Example inventory hosts file
-############################
+### Example inventory hosts file
 [webserver]
-192.168.1.1
+- 192.168.1.1
 
 [common]
-192.168.1.1
-192.168.24.1
+- 192.168.1.1
+- 192.168.24.1
 
 [database]
-231.8.1.44
+- 231.8.1.44
 
 [honeypot]
-123.44.23.1
+- 123.44.23.1
 
 ### Working with DATA
 - Variables
@@ -102,4 +98,3 @@ For example:
 - ansible-vault decrypt
 
 ansible-playbook --ask-vault-password ...
-
